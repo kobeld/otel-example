@@ -6,6 +6,9 @@ receivers:
 
 exporters:
   logging:
+  otlp:
+    endpoint: "tempo:4317"
+    insecure: "true"
 
 processors:
   batch:
@@ -23,7 +26,7 @@ service:
     traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [logging]
+      exporters: [logging, otlp]
     metrics:
       receivers: [otlp]
       processors: [batch]
